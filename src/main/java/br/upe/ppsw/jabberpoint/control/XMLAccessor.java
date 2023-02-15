@@ -1,4 +1,4 @@
-package br.upe.ppsw.jabberpoint.model;
+package br.upe.ppsw.jabberpoint.control;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +13,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import br.upe.ppsw.jabberpoint.model.BitmapItem;
+import br.upe.ppsw.jabberpoint.model.Presentation;
+import br.upe.ppsw.jabberpoint.model.Slide;
+import br.upe.ppsw.jabberpoint.model.SlideItem;
+import br.upe.ppsw.jabberpoint.model.TextItem;
 
 public class XMLAccessor extends Accessor {
 
@@ -38,7 +44,7 @@ public class XMLAccessor extends Accessor {
 
   }
 
-  public void loadFile(Presentation presentation, String filename) throws IOException {
+  public void loadFile1(Presentation presentation, String filename) throws IOException {
     int slideNumber, itemNumber, max = 0, maxItems = 0;
 
     try {
@@ -105,7 +111,7 @@ public class XMLAccessor extends Accessor {
     }
   }
 
-  public void saveFile(Presentation presentation, String filename) throws IOException {
+  public void saveFile1(Presentation presentation, String filename) throws IOException {
     PrintWriter out = new PrintWriter(new FileWriter(filename));
 
     out.println("<?xml version=\"1.0\"?>");
@@ -149,5 +155,17 @@ public class XMLAccessor extends Accessor {
 
     out.close();
   }
+
+@Override
+public void loadFile(Presentation presentation, String fileName) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void saveFile(Presentation presentation, String fileName) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
 
 }
