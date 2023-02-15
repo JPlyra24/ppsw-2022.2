@@ -2,6 +2,16 @@ package br.upe.ppsw.jabberpoint.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.font.TextLayout;
+import java.awt.image.ImageObserver;
+import java.util.Iterator;
+import java.util.List;
+
+import br.upe.ppsw.jabberpoint.model.BitmapItem;
+import br.upe.ppsw.jabberpoint.model.TextItem;
 
 public class Style {
 
@@ -44,5 +54,36 @@ public class Style {
 
   public Font getFont(float scale) {
     return font.deriveFont(fontSize * scale);
+  }
+
+public void draw(int x, int y, float scale, Graphics g, BitmapItem bitmapItem, ImageObserver observer) {
+    int width = x + (int) (indent * scale);
+    int height = y + (int) (leading * scale);
+
+    g.drawImage(bitmapItem.bufferedImage, width, height, (int) (bitmapItem.bufferedImage.getWidth(observer) * scale),
+        (int) (bitmapItem.bufferedImage.getHeight(observer) * scale), observer);
+  }
+
+public void draw(int x, int y, float scale, Graphics g, TextItem textItem, ImageObserver o) {
+    if (textItem.text == null || textItem.text.length() == 0) {
+      return;
+    }
+
+    List<TextLayout> layouts = textItem.getLayouts(g, this, scale);
+    Point pen = new Point(x + (int) (indent * scale), y + (int) (leading * scale));
+
+    Graphics2D g2d = (Graphics2D) g;
+    g2d.setColor(color);
+
+    Iterator<TextLayout> it = layouts.iterator();
+
+    while (it.hasNext()) {
+      TextLayout layout = it.next();
+
+      pen.y += layout.getAscent();
+      layout.draw(g2d, pen.x, pen.y);
+
+      pen.y += layout.getDescent();
+    }
   }
 }

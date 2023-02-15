@@ -12,7 +12,7 @@ import br.upe.ppsw.jabberpoint.view.Style;
 
 public class BitmapItem extends SlideItem {
 
-  private BufferedImage bufferedImage;
+  public BufferedImage bufferedImage;
   private String imageName;
 
   protected static final String FILE = "Arquivo ";
@@ -45,13 +45,12 @@ public class BitmapItem extends SlideItem {
         ((int) (myStyle.leading * scale)) + (int) (bufferedImage.getHeight(observer) * scale));
   }
 
+  /**
+ * @deprecated Use {@link br.upe.ppsw.jabberpoint.view.Style#draw(int,int,float,Graphics,br.upe.ppsw.jabberpoint.model.BitmapItem,ImageObserver)} instead
+ */
   public void draw(int x, int y, float scale, Graphics g, Style myStyle, ImageObserver observer) {
-    int width = x + (int) (myStyle.indent * scale);
-    int height = y + (int) (myStyle.leading * scale);
-
-    g.drawImage(bufferedImage, width, height, (int) (bufferedImage.getWidth(observer) * scale),
-        (int) (bufferedImage.getHeight(observer) * scale), observer);
-  }
+	myStyle.draw(x, y, scale, g, this, observer);
+}
 
   public String toString() {
     return "BitmapItem[" + getLevel() + "," + imageName + "]";

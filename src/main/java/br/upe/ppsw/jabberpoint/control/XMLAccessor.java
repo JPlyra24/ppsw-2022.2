@@ -44,7 +44,7 @@ public class XMLAccessor extends Accessor {
 
   }
 
-  public void loadFile1(Presentation presentation, String filename) throws IOException {
+  public void loadFile(Presentation presentation, String filename) throws IOException {
     int slideNumber, itemNumber, max = 0, maxItems = 0;
 
     try {
@@ -111,7 +111,7 @@ public class XMLAccessor extends Accessor {
     }
   }
 
-  public void saveFile1(Presentation presentation, String filename) throws IOException {
+  public void saveFile(Presentation presentation, String filename) throws IOException {
     PrintWriter out = new PrintWriter(new FileWriter(filename));
 
     out.println("<?xml version=\"1.0\"?>");
@@ -155,17 +155,5 @@ public class XMLAccessor extends Accessor {
 
     out.close();
   }
-
-@Override
-public void loadFile(Presentation presentation, String fileName) throws IOException {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void saveFile(Presentation presentation, String fileName) throws IOException {
-	// TODO Auto-generated method stub
-	
-}
 
 }
